@@ -12,14 +12,14 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     BrowserModule,
     MaterialModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot()
+    BrowserAnimationsModule
   ],
   exports: [
     CommonModule,
     BrowserModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule
   ]
 })
 export class SharedModule {
