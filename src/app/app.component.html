@@ -1,0 +1,22 @@
+<mat-card [class.dark-theme]="darkTheme">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Custom Toolbar</span>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <span>Second Line</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <span>Third Line</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+  <button mat-raised-button (click)="darkTheme = !darkTheme" color="primary">Change Theme</button>
+</mat-card>

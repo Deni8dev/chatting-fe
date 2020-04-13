@@ -1,0 +1,41 @@
+=button-padding-before
+  -webkit-padding-before: 2px
+
+=button-icon($content, $font-family)
+  content: $content
+  font-family: $font-family
+  font-weight: normal
+  padding-left: 10px
+
+=transition($transition: null)
+  @if $transition
+    -webkit-transition: $transition
+    -moz-transition: $transition
+    -o-transition: $transition
+    transition: $transition
+  @else
+    -webkit-transition: all .3s
+    -moz-transition: all .3s
+    -o-transition: all .3s
+    transition: all .3s
+
+=user-select($value)
+  -webkit-user-select: $value
+  -moz-user-select: $value
+  -ms-user-select: $value
+  user-select: $value
+
+=border-radius($value)
+  -webkit-border-radius: $value
+  -moz-border-radius: $value
+  border-radius: $value
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content

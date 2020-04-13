@@ -1,0 +1,17 @@
+%full-window-coverage
+  height: 100%
+  width: 100%
+
+%flex-container
+  @extend %full-window-coverage
+  align-items: center
+  display: flex
+  justify-content: center
+
+.row-centered-container
+  @extend %flex-container
+  flex-direction: row
+
+.column-centered-container
+  @extend %flex-container
+  flex-direction: column
