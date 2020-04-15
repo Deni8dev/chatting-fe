@@ -9,7 +9,7 @@ $cht-accent: mat-palette($mat-pink, A200, A100, A400)
 $cht-warn: mat-palette($mat-red)
 
 $cht-light-theme: mat-light-theme($cht-primary, $cht-accent, $cht-warn)
-$cht-dark-theme: mat-dark-theme($cht-primary, $cht-accent, $cht-warn)
+$cht-dark-theme: mat-dark-theme(mat-palette($mat-green), mat-palette($mat-blue-grey), $cht-warn)
 
 // The default Application theme
 @include angular-material-theme($cht-light-theme)
@@ -17,3 +17,4 @@ $cht-dark-theme: mat-dark-theme($cht-primary, $cht-accent, $cht-warn)
 // The Dark Application theme
 .dark-theme
   @include angular-material-theme($cht-dark-theme)
+  background: gray
