@@ -1,0 +1,26 @@
+<div class="column-centered-container">
+  <mat-card class="form-container mat-elevation-z5">
+    <form [formGroup]="form" (ngSubmit)="login()" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label translate>login.form.username</mat-label>
+        <input matInput formControlName="username" [placeholder]="'login.form.username' | translate">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label translate>login.form.password</mat-label>
+        <input matInput formControlName="password" [type]="formPasswordType"
+               [placeholder]="'login.form.password' | translate">
+        <button mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="hide ? 'login.form.password.show' : 'login.form.password.hide' | translate"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-flat-button routerLink="/acc/sign-up">Sign Up</button>
+
+      <button mat-raised-button [attr.aria-label]="'login.form.submit' | translate" class="float-right">
+        {{ 'login.form.submit' | translate }}
+      </button>
+    </form>
+  </mat-card>
+</div>

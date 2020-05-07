@@ -1,3 +1,12 @@
 {
-  "primary.title": "Chatting"
+  "primary.title": "Chatting",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "birth_date": "Birth Date",
+  "login.form.username": "Username",
+  "login.form.password": "Password",
+  "login.form.password.show": "Password",
+  "login.form.password.hide": "Password",
+  "login.form.submit": "Login"
 }

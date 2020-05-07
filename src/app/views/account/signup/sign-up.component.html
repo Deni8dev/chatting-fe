@@ -1,0 +1,25 @@
+<form [formGroup]="form" class="form">
+  <mat-form-field appearance="outline">
+    <mat-label translate>name</mat-label>
+    <input matInput formControlName="name" [placeholder]="'name' | translate">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label translate>Email</mat-label>
+    <input matInput formControlName="email" [placeholder]="'email' | translate">
+  </mat-form-field>
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Amount</mat-label>
+    <mat-icon matPrefix>phone</mat-icon>
+    <input matInput type="number" formControlName="phone" class="number" [placeholder]="'phone' | translate">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label translate>birth_date</mat-label>
+    <input matInput formControlName="birthDate" [placeholder]="'birth_date' | translate">
+  </mat-form-field>
+
+  <button mat-flat-button routerLink="/acc/login">Log In</button>
+
+  <button mat-raised-button class="float-right">
+    <mat-icon>add</mat-icon>Create
+  </button>
+</form>

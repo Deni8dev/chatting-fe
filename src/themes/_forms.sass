@@ -1,0 +1,72 @@
+\:host
+  display: flex
+  flex: 1
+
+.inline-loader
+  display: inline-block
+
+.version
+  margin: 0
+
+.form__title
+  font-family: $font-family--title
+  font-size: 1.2em
+  margin: 10px 0 15px 0
+  opacity: 50
+  font-weight: bold
+
+.form-container
+  width: 50%
+
+  @media screen and (max-width: 539px)
+    width: 80%
+
+  @media screen and (min-width: 540px) and (max-width: 739px)
+    width: 70%
+
+  @media screen and (min-width: 740px) and (max-width: 959px)
+    width: 60%
+
+  @media screen and (min-width: 960px) and (max-width: 1199px)
+    width: 80%
+
+  @media screen and (min-width: 1200px) and (max-width: 1459px)
+    width: 70%
+
+  @media screen and (min-width: 1460px) and (max-width: 1699px)
+    width: 60%
+
+  @media screen and (min-width: 2499px)
+    width: 40%
+
+.form
+  width: 100%
+
+  mat-form-field
+    width: 100%
+
+  .mat-input
+    font-family: $font-family--paragraph
+
+  .form__button
+
+    display: inline-block
+    font-size: 12px
+    margin-top: 50px
+    min-width: 132px
+
+.form__btn--forward
+  float: right
+
+.form-label-error
+  margin-bottom: 20px
+  text-align: center
+
+  &:before
+    content: url('/assets/img/login/login_error.png')
+    margin-right: 5px
+    position: relative
+    top: 2px
+
+.input-error
+  text-align: right

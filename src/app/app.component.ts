@@ -1,22 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { untilDestroyed } from '@core/until-destroyed';
+import { untilDestroyed } from '@core/sys';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { I18nService } from '@data-providers/i18n';
 import { environment } from '@env/environment';
-import { Logger } from '@data-providers/logger';
 import moment from 'moment-timezone';
 import { merge } from 'rxjs';
-import { SocketIoService } from '@core/socket-io/socket-io.service';
+import { SocketIoService } from '@core/socket-io';
+import { Logger } from '@core/logger';
+import { I18nService } from '@core/i18n';
 
 const logger = new Logger('App');
 
-export interface Interface {
-  name?: string;
-  value?: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -25,26 +21,32 @@ export interface Interface {
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  // ToDo: Do not remove til add theming functionality.
   darkTheme = false;
+
   title = 'socketio-angular';
   messages: string[] = [];
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private titleService: Title,
-              private translateService: TranslateService,
-              private i18nService: I18nService,
+  private _socket: any;
+
+  constructor(private _router: Router,
+              private _activatedRoute: ActivatedRoute,
+              private _titleService: Title,
+              private _translateService: TranslateService,
+              private _i18nService: I18nService,
               private _socketIOService: SocketIoService
   ) {}
 
   ngOnInit() {
-    this._socketIOService.setupSocketConnection();
-    this._socketIOService.socket.on('messageFromBackend', (msg) => {
-      this.messages.push(msg);
-    });
-    this._socketIOService.socket.on('connection', () => {
-      logger.debug('Connected...');
-    });
+    // this._socketIOService.setupSocketIO();
+    // this._socket = this._socketIOService.socket;
+    //
+    // this._socket.on('messageFromBackend', (msg) => {
+    //   this.messages.push(msg);
+    // });
+    // this._socket.on('connection', () => {
+    //   logger.debug('Connected...');
+    // });
 
     // Setup time zone
     moment.tz.setDefault('Etc/UTC');
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
     logger.debug('init');
 
     // Setup translations
-    this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
+    this._i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
 
     this.updatePageTitleOnLanguageChange();
   }
@@ -65,12 +67,12 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   private updatePageTitleOnLanguageChange() {
 
-    const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
+    const onNavigationEnd = this._router.events.pipe(filter(event => event instanceof NavigationEnd));
 
-    merge(this.translateService.onLangChange, onNavigationEnd)
+    merge(this._translateService.onLangChange, onNavigationEnd)
     .pipe(
       map(() => {
-        let route = this.activatedRoute;
+        let route = this._activatedRoute;
         while (route.firstChild)
           route = route.firstChild;
         return route;
@@ -82,11 +84,11 @@ export class AppComponent implements OnInit, OnDestroy {
     .subscribe(event => {
       const title = event.title;
       if (title)
-        this.titleService.setTitle(this.translateService.instant(title));
+        this._titleService.setTitle(this._translateService.instant(title));
     });
   }
 
   ngOnDestroy() {
-    this.i18nService.destroy();
+    this._i18nService.destroy();
   }
 }

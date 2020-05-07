@@ -12,12 +12,12 @@ export class SocketIoService {
 
   constructor() { }
 
-  setupSocketConnection() {
-    this._socket = socketIO(environment.SOCKET_ENDPOINT);
-    setInterval(() =>
-        this._socket.emit('messageFromFrontend', '[From: Frontend] - Hello, This message appear instantly.'),
-      2000
-    );
+  public setupSocketIO() {
+    this.socket = socketIO(environment.SOCKET_ENDPOINT);
+  }
+
+  set socket(socket: any) {
+    this._socket = socket;
   }
 
   get socket(): any {

@@ -1,0 +1,17 @@
+@import 'mixins'
+
+.shell-container
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  height: 100%
+
+.shell-content
+  background: #FFFFFF
+  position: absolute
+  left: 288px
+  right: 0
+  +transition
+
+  &.full-content
+    left: 64px
