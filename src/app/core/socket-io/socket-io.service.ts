@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as socketIO from 'socket.io-client';
+import socketIO from 'socket.io-client';
 import { environment } from '@env/environment';
 
 
@@ -13,7 +13,7 @@ export class SocketIoService {
   constructor() { }
 
   public setupSocketIO() {
-    this.socket = socketIO(environment.SOCKET_ENDPOINT);
+    this.socket = socketIO(environment.socket_endpoint);
   }
 
   set socket(socket: any) {

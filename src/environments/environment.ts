@@ -14,9 +14,8 @@ import env from '@env/.env';
 export const environment = {
   production: false,
   hmr: true,
-  version: env.npm_package_version + '-dev',
-  serverUrl: '',
-  defaultLanguage: 'en-US',
-  supportedLanguages: ['en-US'],
-  SOCKET_ENDPOINT: 'http://localhost:3000'
+  version: env.app_version + '-dev',
+  default_language: 'en-US',
+  supported_languages: ['en-US'],
+  socket_endpoint: 'http://localhost:3100'
 };

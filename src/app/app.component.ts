@@ -38,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    // ToDo: Enable and move to correct view.
     // this._socketIOService.setupSocketIO();
     // this._socket = this._socketIOService.socket;
     //
@@ -54,10 +55,10 @@ export class AppComponent implements OnInit, OnDestroy {
     if (environment.production)
       Logger.enableProductionMode();
 
-    logger.debug('init');
+    logger.debug('Init', environment.version);
 
     // Setup translations
-    this._i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
+    this._i18nService.init(environment.default_language, environment.supported_languages);
 
     this.updatePageTitleOnLanguageChange();
   }

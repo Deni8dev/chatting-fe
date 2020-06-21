@@ -1,3 +1,5 @@
+import packageJson from '../../package.json';
+
 export default {
-  npm_package_version: '1.0.0'
+  app_version: packageJson.version
 };
