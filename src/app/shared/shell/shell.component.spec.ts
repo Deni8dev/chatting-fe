@@ -2,13 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellComponent } from './shell.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '../material.module';
-import { AuthenticationService } from '../data-providers';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
-import { LeftMenuComponent } from './components/left-menu/left-menu.component';
-import { LeftToolbarComponent } from './components/left-toolbar/left-toolbar.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MaterialModule } from '@shared/material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthenticationService } from '@core/authentication';
 
 describe('ShellComponent', () => {
   let component: ShellComponent;
@@ -17,7 +14,7 @@ describe('ShellComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MaterialModule, BrowserAnimationsModule, RouterTestingModule],
-      declarations: [ShellComponent, LeftNavigationComponent, LeftToolbarComponent, LeftMenuComponent],
+      declarations: [ShellComponent],
       providers: [AuthenticationService, CookieService]
     }).compileComponents();
   }));
@@ -28,7 +25,7 @@ describe('ShellComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
