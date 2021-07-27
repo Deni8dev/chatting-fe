@@ -1,1 +1,1 @@
-export * from './socket-io.service';
+export * from './socket-io.service'

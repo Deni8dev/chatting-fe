@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '@shared/shared.module';
-import { ShellComponent } from '@shared/shell/shell.component';
+import { NgModule } from '@angular/core'
+import { SharedModule } from '@shared/shared.module'
+import { ShellComponent } from '@shared/shell/shell.component'
 
 
 @NgModule({
@@ -9,5 +9,4 @@ import { ShellComponent } from '@shared/shell/shell.component';
     SharedModule
   ]
 })
-export class ShellModule {
-}
+export class ShellModule {}

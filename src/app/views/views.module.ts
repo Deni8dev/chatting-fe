@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { AccountModule } from '@views/account';
-import { HomePageModule } from '@views/home-page';
-import { ViewsRoutingModule } from '@views/views-routing.module';
+import { NgModule } from '@angular/core'
+import { AccountModule } from '@views/account'
+import { HomePageModule } from '@views/home-page'
+import { ViewsRoutingModule } from '@views/views-routing.module'
 
 
 @NgModule({
@@ -12,5 +12,4 @@ import { ViewsRoutingModule } from '@views/views-routing.module';
     ViewsRoutingModule
   ]
 })
-export class ViewsModule {
-}
+export class ViewsModule {}

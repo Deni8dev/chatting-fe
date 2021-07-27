@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
+import { NgModule } from '@angular/core'
 
 
 @NgModule({
@@ -7,5 +7,4 @@ import { NgModule } from '@angular/core';
   imports: [HttpClientModule],
   providers: []
 })
-export class CoreModule {
-}
+export class CoreModule {}

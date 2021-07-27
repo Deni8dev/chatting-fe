@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Logger } from '../logger';
-import enUS from '../../../translations/en-US.json';
-import { Subscription } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { Logger } from '../logging'
+import enUS from '../../../translations/en-US.json'
+import { Subscription } from 'rxjs'
 
-const log = new Logger('I18nService');
-const languageKey = 'language';
+const log = new Logger('I18nService')
+const languageKey = 'language'
 
 /**
  * Pass-through function to mark a string for translation extraction.
@@ -13,8 +13,8 @@ const languageKey = 'language';
  * @param s The string to extract for translation.
  * @return The same string.
  */
-export function extract(s: string) {
-  return s;
+export function extract(s: string): string {
+  return s
 }
 
 
@@ -23,14 +23,14 @@ export function extract(s: string) {
 })
 export class I18nService {
 
-  defaultLanguage!: string;
-  supportedLanguages!: string[];
+  defaultLanguage!: string
+  supportedLanguages!: string[]
 
-  private langChangeSubscription!: Subscription;
+  private langChangeSubscription!: Subscription
 
   constructor(private translateService: TranslateService) {
     // Embed languages to avoid extra HTTP requests
-    translateService.setTranslation('en-US', enUS);
+    translateService.setTranslation('en-US', enUS)
   }
 
   /**
@@ -39,23 +39,23 @@ export class I18nService {
    * @param defaultLanguage The default language to use.
    * @param supportedLanguages The list of supported languages.
    */
-  init(defaultLanguage: string, supportedLanguages: string[]) {
-    this.defaultLanguage = defaultLanguage;
-    this.supportedLanguages = supportedLanguages;
-    this.language = '';
+  init(defaultLanguage: string, supportedLanguages: string[]): void {
+    this.defaultLanguage = defaultLanguage
+    this.supportedLanguages = supportedLanguages
+    this.language = ''
 
     // Warning: this subscription will always be alive for the app's lifetime
     this.langChangeSubscription = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      localStorage.setItem(languageKey, event.lang);
-    });
+      localStorage.setItem(languageKey, event.lang)
+    })
   }
 
   /**
    * Cleans up language change subscription.
    */
-  destroy() {
+  destroy(): void {
     if (this.langChangeSubscription)
-      this.langChangeSubscription.unsubscribe();
+      this.langChangeSubscription.unsubscribe()
   }
 
   /**
@@ -65,22 +65,22 @@ export class I18nService {
    * @param language The IETF language code to set.
    */
   set language(language: string) {
-    language = language || localStorage.getItem(languageKey) || this.translateService.getBrowserCultureLang();
-    let isSupportedLanguage = this.supportedLanguages.includes(language);
+    language = language || localStorage.getItem(languageKey) || this.translateService.getBrowserCultureLang()
+    let isSupportedLanguage = this.supportedLanguages.includes(language)
 
     // If no exact match is found, search without the region
     if (language && !isSupportedLanguage) {
-      language = language.split('-')[0];
-      language = this.supportedLanguages.find(supportedLanguage => supportedLanguage.startsWith(language)) || '';
-      isSupportedLanguage = Boolean(language);
+      language = language.split('-')[0]
+      language = this.supportedLanguages.find(supportedLanguage => supportedLanguage.startsWith(language)) || ''
+      isSupportedLanguage = Boolean(language)
     }
 
     // Fallback if language is not supported
     if (!isSupportedLanguage)
-      language = this.defaultLanguage;
+      language = this.defaultLanguage
 
-    log.debug(`Language set to ${language}`);
-    this.translateService.use(language);
+    log.debug(`Language set to ${language}`)
+    this.translateService.use(language)
   }
 
   /**
@@ -88,6 +88,6 @@ export class I18nService {
    * @return The current language code.
    */
   get language(): string {
-    return this.translateService.currentLang;
+    return this.translateService.currentLang
   }
 }

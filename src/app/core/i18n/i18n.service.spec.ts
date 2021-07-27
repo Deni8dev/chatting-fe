@@ -1,40 +1,40 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { inject, TestBed } from '@angular/core/testing'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { Subject } from 'rxjs'
 
-import { extract, I18nService } from './i18n.service';
+import { extract, I18nService } from './i18n.service'
 
-const defaultLanguage = 'en-US';
-const supportedLanguages = ['eo', 'en-US', 'fr-FR'];
+const defaultLanguage = 'en-US'
+const supportedLanguages = ['eo', 'en-US', 'fr-FR']
 
 class MockTranslateService {
 
-  currentLang: string;
-  onLangChange = new Subject();
+  currentLang: string
+  onLangChange = new Subject()
 
-  use(language: string) {
-    this.currentLang = language;
+  use(language: string): void {
+    this.currentLang = language
     this.onLangChange.next({
       lang: this.currentLang,
       translations: {}
-    });
+    })
   }
 
 }
 
 describe('I18nService', () => {
-  let i18nService: I18nService;
-  let translateService: TranslateService;
-  let onLangChangeSpy: jasmine.Spy;
+  let i18nService: I18nService
+  let translateService: TranslateService
+  let onLangChangeSpy: jasmine.Spy
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         I18nService,
-        { provide: TranslateService, useClass: MockTranslateService },
+        { provide: TranslateService, useClass: MockTranslateService }
       ]
-    });
-  });
+    })
+  })
 
   beforeEach(inject([
     I18nService,
@@ -42,105 +42,105 @@ describe('I18nService', () => {
   ], (_i18nService: I18nService,
       _translateService: TranslateService) => {
 
-    i18nService = _i18nService;
-    translateService = _translateService;
+    i18nService = _i18nService
+    translateService = _translateService
 
     // Create spies
-    onLangChangeSpy = jasmine.createSpy('onLangChangeSpy');
+    onLangChangeSpy = jasmine.createSpy('onLangChangeSpy')
     translateService.onLangChange
       .subscribe((event: LangChangeEvent) => {
-        onLangChangeSpy(event.lang);
-      });
-    spyOn(translateService, 'use').and.callThrough();
-  }));
+        onLangChangeSpy(event.lang)
+      })
+    spyOn(translateService, 'use').and.callThrough()
+  }))
 
   afterEach(() => {
     // Cleanup
-    localStorage.removeItem('language');
-  });
+    localStorage.removeItem('language')
+  })
 
   describe('extract', () => {
     it('should not modify string', () => {
-      expect(extract('Hello world !')).toEqual('Hello world !');
-    });
-  });
+      expect(extract('Hello world !')).toEqual('Hello world !')
+    })
+  })
 
   describe('init', () => {
     it('should init with default language', () => {
       // Act
-      i18nService.init(defaultLanguage, supportedLanguages);
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith(defaultLanguage);
-      expect(onLangChangeSpy).toHaveBeenCalledWith(defaultLanguage);
-    });
+      expect(translateService.use).toHaveBeenCalledWith(defaultLanguage)
+      expect(onLangChangeSpy).toHaveBeenCalledWith(defaultLanguage)
+    })
 
     it('should init with save language', () => {
       // Arrange
-      const savedLanguage = 'eo';
-      localStorage.setItem('language', savedLanguage);
+      const savedLanguage = 'eo'
+      localStorage.setItem('language', savedLanguage)
 
       // Act
-      i18nService.init(defaultLanguage, supportedLanguages);
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith(savedLanguage);
-      expect(onLangChangeSpy).toHaveBeenCalledWith(savedLanguage);
-    });
-  });
+      expect(translateService.use).toHaveBeenCalledWith(savedLanguage)
+      expect(onLangChangeSpy).toHaveBeenCalledWith(savedLanguage)
+    })
+  })
 
   describe('set language', () => {
     it('should change current language', () => {
       // Arrange
-      const newLanguage = 'eo';
-      i18nService.init(defaultLanguage, supportedLanguages);
+      const newLanguage = 'eo'
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Act
-      i18nService.language = newLanguage;
+      i18nService.language = newLanguage
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith(newLanguage);
-      expect(onLangChangeSpy).toHaveBeenCalledWith(newLanguage);
-    });
+      expect(translateService.use).toHaveBeenCalledWith(newLanguage)
+      expect(onLangChangeSpy).toHaveBeenCalledWith(newLanguage)
+    })
 
     it('should change current language without a region match', () => {
       // Arrange
-      const newLanguage = 'fr-CA';
-      i18nService.init(defaultLanguage, supportedLanguages);
+      const newLanguage = 'fr-CA'
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Act
-      i18nService.language = newLanguage;
+      i18nService.language = newLanguage
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith('fr-FR');
-      expect(onLangChangeSpy).toHaveBeenCalledWith('fr-FR');
-    });
+      expect(translateService.use).toHaveBeenCalledWith('fr-FR')
+      expect(onLangChangeSpy).toHaveBeenCalledWith('fr-FR')
+    })
 
     it('should change current language to default if unsupported', () => {
       // Arrange
-      const newLanguage = 'es';
-      i18nService.init(defaultLanguage, supportedLanguages);
+      const newLanguage = 'es'
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Act
-      i18nService.language = newLanguage;
+      i18nService.language = newLanguage
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith(defaultLanguage);
-      expect(onLangChangeSpy).toHaveBeenCalledWith(defaultLanguage);
-    });
-  });
+      expect(translateService.use).toHaveBeenCalledWith(defaultLanguage)
+      expect(onLangChangeSpy).toHaveBeenCalledWith(defaultLanguage)
+    })
+  })
 
   describe('get language', () => {
     it('should return current language', () => {
       // Arrange
-      i18nService.init(defaultLanguage, supportedLanguages);
+      i18nService.init(defaultLanguage, supportedLanguages)
 
       // Act
-      const currentLanguage = i18nService.language;
+      const currentLanguage = i18nService.language
 
       // Assert
-      expect(currentLanguage).toEqual(defaultLanguage);
-    });
-  });
+      expect(currentLanguage).toEqual(defaultLanguage)
+    })
+  })
 
-});
+})

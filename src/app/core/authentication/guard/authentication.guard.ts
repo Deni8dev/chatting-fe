@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { CanActivate, Router } from '@angular/router'
 
-import { AuthenticationService } from '@core/authentication';
+import { AuthenticationService } from '@core/authentication'
 
 
 @Injectable({
@@ -15,10 +15,10 @@ export class AuthenticationGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this._authenticationService.isAuthenticated)
-      return true;
+      return true
 
-    this._router.navigate(['/'], { replaceUrl: true });
-    return false;
+    this._router.navigate(['/'], { replaceUrl: true })
+    return false
   }
 
 }

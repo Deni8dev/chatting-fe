@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { LoginContext, SessionStorage } from '@core/authentication';
-import { User } from '@core/dto';
-import { CookieService } from 'ngx-cookie-service';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { LoginContext, SessionStorage } from '@core/authentication'
+import { User } from '@core/dto'
+import { CookieService } from 'ngx-cookie-service'
+import { Observable, of } from 'rxjs'
+import { map } from 'rxjs/operators'
 
-export const SESSION_STORAGE_KEY = 'sessionStorage';
+export const SESSION_STORAGE_KEY = 'sessionStorage'
 
 
 @Injectable({
@@ -14,13 +14,13 @@ export const SESSION_STORAGE_KEY = 'sessionStorage';
 })
 export class AuthenticationService {
 
-  static readonly serverUrl = '/authentication-api/v1/token';
+  static readonly serverUrl = '/authentication-api/v1/token'
 
-  private _sessionStorage: SessionStorage | null;
+  private _sessionStorage: SessionStorage | null
 
   constructor(private _http: HttpClient, private _cookieService: CookieService) {
-    const str = this._cookieService.get(SESSION_STORAGE_KEY);
-    this._sessionStorage = str ? JSON.parse(str) : null;
+    const str = this._cookieService.get(SESSION_STORAGE_KEY)
+    this._sessionStorage = str ? JSON.parse(str) : null
   }
 
   /**
@@ -31,8 +31,8 @@ export class AuthenticationService {
    */
   login(context: LoginContext): Observable<User> {
     return this._http
-    .post<User>(AuthenticationService.serverUrl, context)
-    .pipe(map(loggedUser => this.saveSessionData({ user: loggedUser }).user));
+      .post<User>(AuthenticationService.serverUrl, context)
+      .pipe(map(loggedUser => this.saveSessionData({ user: loggedUser }).user))
   }
 
   /**
@@ -42,11 +42,11 @@ export class AuthenticationService {
    */
   logout(): Observable<boolean> {
     try {
-      this._sessionStorage = null;
-      this._cookieService.delete(SESSION_STORAGE_KEY);
-      return of(true);
+      this._sessionStorage = null
+      this._cookieService.delete(SESSION_STORAGE_KEY)
+      return of(true)
     } catch (e) {
-      return of(false);
+      return of(false)
     }
   }
 
@@ -57,15 +57,15 @@ export class AuthenticationService {
    */
   get isAuthenticated(): boolean {
     // ToDo: Enable conditions
-    // return !!this.sessionStorageUser || !!this._cookieService.get(SESSION_STORAGE_KEY);
-    return true;
+    // return !!this.sessionStorageUser || !!this._cookieService.get(SESSION_STORAGE_KEY)
+    return true
   }
 
   /**
    * @return Data of current session.
    */
   get sessionStorage(): SessionStorage | null {
-    return this._sessionStorage;
+    return this._sessionStorage
   }
 
   /**
@@ -73,12 +73,12 @@ export class AuthenticationService {
    * @return User or null if the user is not authenticated.
    */
   get sessionStorageUser(): User | null {
-    return this._sessionStorage ? this._sessionStorage.user : null;
+    return this._sessionStorage ? this._sessionStorage.user : null
   }
 
   saveSessionData(sessionStorage: SessionStorage): SessionStorage {
-    this._sessionStorage = sessionStorage;
-    this._cookieService.set(SESSION_STORAGE_KEY, JSON.stringify(sessionStorage));
-    return this._sessionStorage;
+    this._sessionStorage = sessionStorage
+    this._cookieService.set(SESSION_STORAGE_KEY, JSON.stringify(sessionStorage))
+    return this._sessionStorage
   }
 }

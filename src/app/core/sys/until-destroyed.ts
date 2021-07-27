@@ -1,7 +1,7 @@
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
-const untilDestroyedSymbol = Symbol('untilDestroyed');
+const untilDestroyedSymbol = Symbol('untilDestroyed')
 
 /**
  * RxJS operator that unsubscribe from observables on destory.
@@ -14,7 +14,7 @@ const untilDestroyedSymbol = Symbol('untilDestroyed');
  * @param destroyMethodName The method to hook on (default: 'ngOnDestroy').
  * @example
  * ```
- * import { untilDestroyed } from '@app/core';
+ * import { untilDestroyed } from '@app/core'
  *
  * @Component({
  * selector: 'app-example',
@@ -24,7 +24,7 @@ const untilDestroyedSymbol = Symbol('untilDestroyed');
  *   ngOnInit() {
  *     interval(1000)
  *       .pipe(untilDestroyed(this))
- *       .subscribe(val => console.log(val));
+ *       .subscribe(val => console.log(val))
  *   }
  *
  *   // This method must be present, even if empty.
@@ -36,25 +36,25 @@ const untilDestroyedSymbol = Symbol('untilDestroyed');
  */
 export function untilDestroyed(instance: object, destroyMethodName: string = 'ngOnDestroy') {
   return <T>(source: Observable<T>) => {
-    const originalDestroy = instance[destroyMethodName];
-    const hasDestroyFunction = typeof originalDestroy === 'function';
+    const originalDestroy = instance[destroyMethodName]
+    const hasDestroyFunction = typeof originalDestroy === 'function'
 
     if (!hasDestroyFunction)
       throw new Error(
         `${instance.constructor.name} is using untilDestroyed but doesn't implement ${destroyMethodName}`
-      );
+      )
 
     if (!instance[untilDestroyedSymbol]) {
-      instance[untilDestroyedSymbol] = new Subject();
+      instance[untilDestroyedSymbol] = new Subject()
 
       instance[destroyMethodName] = () => {
         if (hasDestroyFunction)
-          originalDestroy.apply(this, arguments);
-        instance[untilDestroyedSymbol].next();
-        instance[untilDestroyedSymbol].complete();
-      };
+          originalDestroy.apply(this, arguments)
+        instance[untilDestroyedSymbol].next()
+        instance[untilDestroyedSymbol].complete()
+      }
     }
 
-    return source.pipe(takeUntil<T>(instance[untilDestroyedSymbol]));
-  };
+    return source.pipe(takeUntil<T>(instance[untilDestroyedSymbol]))
+  }
 }

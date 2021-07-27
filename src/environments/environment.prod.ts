@@ -1,4 +1,4 @@
-import env from '@env/.env';
+import env from '@env/.env'
 
 export const environment = {
   production: true,
@@ -6,4 +6,4 @@ export const environment = {
   default_language: 'en-US',
   supported_languages: ['en-US'],
   socket_endpoint: 'http://localhost:3100'
-};
+}

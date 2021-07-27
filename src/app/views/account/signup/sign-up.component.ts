@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Forms } from '@shared/components';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Forms } from '@shared/components'
 
 
 @Component({
@@ -10,13 +10,12 @@ import { Forms } from '@shared/components';
 })
 export class SignUpComponent implements OnInit {
 
-  form: FormGroup;
+  form: FormGroup
 
-  constructor(private _formBuilder: FormBuilder) {
-  }
+  constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.buildForm();
+    this.buildForm()
   }
 
   private buildForm() {
@@ -25,6 +24,6 @@ export class SignUpComponent implements OnInit {
       email: Forms.buildFormControl(Validators.email),
       phone: Forms.buildFormControl(),
       birthDate: Forms.buildFormControl()
-    });
+    })
   }
 }

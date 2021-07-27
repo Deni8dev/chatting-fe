@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Logger } from '@core/logger';
-import { Forms } from '@shared/components';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { Logger } from '@core/logging'
+import { Forms } from '@shared/components'
 
-const logger = new Logger('Login');
+const logger = new Logger('Login')
 
 @Component({
   selector: 'cht-login',
@@ -12,28 +12,28 @@ const logger = new Logger('Login');
 })
 export class LoginComponent implements OnInit {
 
-  hide: boolean;
-  form: FormGroup;
+  hide: boolean
+  form: FormGroup
 
   constructor(private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.buildForm();
+    this.buildForm()
   }
 
-  login() {
-    logger.debug(this.form.getRawValue());
+  login(): void {
+    logger.debug(this.form.getRawValue())
   }
 
-  private buildForm() {
+  private buildForm(): void {
     this.form = this._formBuilder.group({
       username: Forms.buildFormControl(),
       password: Forms.buildFormControl()
-    });
+    })
   }
 
   get formPasswordType(): string {
-    return this.hide ? 'password' : 'text';
+    return this.hide ? 'password' : 'text'
   }
 }

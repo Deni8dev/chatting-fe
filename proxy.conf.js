@@ -1,4 +1,4 @@
-const HttpsProxyAgent = require('https-proxy-agent');
+const HttpsProxyAgent = require('https-proxy-agent')
 
 /*
  * API proxy configuration.
@@ -13,27 +13,27 @@ const proxyConfig = [
     changeOrigin: true,
     secure: false
   }
-];
+]
 
 /*
  * Configures a corporate proxy agent for the API proxy if needed.
  */
 function setupForCorporateProxy(proxyConfig) {
   if (!Array.isArray(proxyConfig)) {
-    proxyConfig = [proxyConfig];
+    proxyConfig = [proxyConfig]
   }
 
-  const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+  const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY
 
   if (proxyServer) {
-    console.log(`Using corporate proxy server: ${proxyServer}`);
-    const agent = new HttpsProxyAgent(proxyServer);
+    console.log(`Using corporate proxy server: ${proxyServer}`)
+    const agent = new HttpsProxyAgent(proxyServer)
     proxyConfig.forEach(entry => {
-      entry.agent = agent;
-    });
+      entry.agent = agent
+    })
   }
 
-  return proxyConfig;
+  return proxyConfig
 }
 
-module.exports = setupForCorporateProxy(proxyConfig);
+module.exports = setupForCorporateProxy(proxyConfig)

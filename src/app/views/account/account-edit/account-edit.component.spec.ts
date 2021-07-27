@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AccountEditComponent } from './account-edit.component';
+import { AccountEditComponent } from './account-edit.component'
 
 describe('AccountEditComponent', () => {
-  let component: AccountEditComponent;
-  let fixture: ComponentFixture<AccountEditComponent>;
+  let component: AccountEditComponent
+  let fixture: ComponentFixture<AccountEditComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountEditComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [AccountEditComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(AccountEditComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
